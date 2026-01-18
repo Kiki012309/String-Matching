@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Journal {
+  id                Int      @id @default(autoincrement())
+  title             String   @db.VarChar(500)
+  authors           String   @db.Text
+  publication_date  DateTime @db.Date
+  abstract          String?  @db.Text
+  keywords          String?  @db.VarChar(500)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  @@fulltext([title])
+  @@fulltext([authors])
+  @@fulltext([keywords])
+  @@map("journals")
+}
