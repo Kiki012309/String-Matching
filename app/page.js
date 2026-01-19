@@ -12,6 +12,8 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
   const [stats, setStats] = useState({ total: 100, categories: 5, authors: 0 })
+  const [algorithm, setAlgorithm] = useState('kmp') // naive, kmp, boyerMoore
+  const [algorithmStats, setAlgorithmStats] = useState(null)
   const resultsPerPage = 20
   const router = useRouter()
 
@@ -50,7 +52,8 @@ export default function Home() {
         body: JSON.stringify({ 
           query: searchQuery,
           page: 1,
-          limit: resultsPerPage
+          limit: resultsPerPage,
+          algorithm: algorithm
         }),
       })
 
@@ -62,6 +65,7 @@ export default function Home() {
 
       setResults(data.results)
       setTotalResults(data.total)
+      setAlgorithmStats(data.algorithmStats)
     } catch (err) {
       setError(err.message)
       setResults([])
@@ -84,7 +88,8 @@ export default function Home() {
         body: JSON.stringify({ 
           query: searchQuery,
           page: newPage,
-          limit: resultsPerPage
+          limit: resultsPerPage,
+          algorithm: algorithm
         }),
       })
 
@@ -96,6 +101,7 @@ export default function Home() {
 
       setResults(data.results)
       setTotalResults(data.total)
+      setAlgorithmStats(data.algorithmStats)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -123,16 +129,34 @@ export default function Home() {
       <div className="container">
         <div className="header">
           <h1>🔍 Pencarian Jurnal Ilmiah</h1>
-          <p>Temukan jurnal dengan cepat menggunakan teknologi string matching</p>
-          <a 
-            href="https://scholar.google.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="header-badge"
-            style={{ textDecoration: 'none', cursor: 'pointer' }}
-          >
-            ✨ Powered by Advanced Search Algorithm | Cari di Google Scholar →
-          </a>
+          <p>Temukan jurnal dengan cepat menggunakan algoritma String Matching</p>
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '15px', flexWrap: 'wrap' }}>
+            <a 
+              href="/compare" 
+              className="header-badge"
+              style={{ 
+                textDecoration: 'none', 
+                cursor: 'pointer',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                padding: '10px 20px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+              }}
+            >
+              📊 Bandingkan Algoritma
+            </a>
+            <a 
+              href="https://scholar.google.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="header-badge"
+              style={{ textDecoration: 'none', cursor: 'pointer' }}
+            >
+              ✨ Cari di Google Scholar →
+            </a>
+          </div>
 
           {/* Statistics Cards */}
           <div className="stats-section">
@@ -153,7 +177,29 @@ export default function Home() {
 
         <div className="search-section">
           <form onSubmit={handleSearch}>
-            <div className="search-box">
+            <div className="search-box" style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <select
+                value={algorithm}
+                onChange={(e) => setAlgorithm(e.target.value)}
+                disabled={loading}
+                style={{
+                  padding: '15px',
+                  borderRadius: '12px',
+                  border: '2px solid #ddd',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  background: 'white',
+                  cursor: 'pointer',
+                  minWidth: '200px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <option value="naive">🔨 Naive (Brute Force)</option>
+                <option value="kmp">🎯 KMP</option>
+                <option value="boyerMoore">🚀 Boyer-Moore</option>
+              </select>
+              
               <input
                 type="text"
                 className="search-input"
@@ -161,7 +207,9 @@ export default function Home() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 disabled={loading}
+                style={{ flex: 1, minWidth: '300px' }}
               />
+              
               <button 
                 type="submit" 
                 className="search-button"
@@ -170,8 +218,8 @@ export default function Home() {
                 <span>{loading ? '🔄 Mencari...' : '🔎 Cari Jurnal'}</span>
               </button>
             </div>
-            <p className="search-info">
-              💡 <strong>Tips:</strong> Masukkan kata kunci seperti machine learning, kesehatan, atau nama penulis
+            <p className="search-info" style={{ marginTop: '15px' }}>
+              💡 <strong>Tips:</strong> Pilih algoritma dan masukkan kata kunci seperti machine learning, BERT, transformer, atau nama penulis
             </p>
           </form>
         </div>
@@ -189,7 +237,7 @@ export default function Home() {
                 <div className="spinner"></div>
                 <p><strong>Sedang mencari jurnal...</strong></p>
                 <p style={{fontSize: '0.9rem', color: '#5a7a99', marginTop: '10px'}}>
-                  Menggunakan algoritma string matching untuk hasil terbaik
+                  Menggunakan algoritma {algorithm === 'naive' ? 'Naive (Brute Force)' : algorithm === 'kmp' ? 'KMP' : 'Boyer-Moore'}
                 </p>
               </div>
             ) : (
@@ -199,6 +247,28 @@ export default function Home() {
                   <p className="results-count">
                     Ditemukan <strong>{totalResults}</strong> jurnal {searchQuery && `untuk "${searchQuery}"`}
                   </p>
+                  {algorithmStats && (
+                    <div style={{
+                      marginTop: '15px',
+                      padding: '15px',
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      borderRadius: '8px',
+                      color: 'white'
+                    }}>
+                      <p style={{ marginBottom: '8px' }}>
+                        <strong>⚡ Algoritma:</strong> {algorithmStats.algorithm}
+                      </p>
+                      <p style={{ marginBottom: '8px' }}>
+                        <strong>⏱️ Waktu Eksekusi:</strong> {algorithmStats.executionTime} ms
+                      </p>
+                      <p style={{ marginBottom: '8px' }}>
+                        <strong>🔢 Perbandingan:</strong> {algorithmStats.comparisons?.toLocaleString() || 0}
+                      </p>
+                      <p>
+                        <strong>📊 Kompleksitas:</strong> {algorithmStats.timeComplexity}
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {totalResults === 0 ? (
@@ -299,8 +369,10 @@ export default function Home() {
               <ul>
                 <li>Next.js & React</li>
                 <li>MySQL Database</li>
-                <li>FULLTEXT Search</li>
-                <li>Levenshtein Algorithm</li>
+                <li>String Matching Algorithms:</li>
+                <li>• Naive (Brute Force)</li>
+                <li>• KMP (Knuth-Morris-Pratt)</li>
+                <li>• Boyer-Moore</li>
               </ul>
             </div>
             <div className="footer-section">

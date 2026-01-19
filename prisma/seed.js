@@ -1,6 +1,21 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
+// Function to generate PDF URLs (contoh: dari Google Scholar, ResearchGate, atau sumber lain)
+function generatePdfUrl(index) {
+  const pdfUrls = [
+    "https://arxiv.org/pdf/2404.01234.pdf",
+    "https://scholar.google.com/scholar?q=string+matching",
+    "https://researchgate.net/publication/123456",
+    "https://doi.org/10.1145/sample",
+    "https://ieeexplore.ieee.org/document/9876543",
+    "https://dl.acm.org/doi/pdf/10.1145/sample",
+    "https://springer.com/article/sample",
+    "https://sciencedirect.com/science/article/pii/sample",
+  ]
+  return pdfUrls[index % pdfUrls.length]
+}
+
 const journalData = [
   // Teknologi & Computer Science (35+ entries dengan topik spesifik)
   {

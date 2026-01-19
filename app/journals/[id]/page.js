@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function JournalDetail({ params }) {
   const [journal, setJournal] = useState(null)
@@ -33,6 +33,19 @@ export default function JournalDetail({ params }) {
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return new Date(dateString).toLocaleDateString('id-ID', options)
+  }
+
+  const handleDownloadPDF = () => {
+    if (journal.pdf_url) {
+      // Create a temporary link to download
+      const link = document.createElement('a')
+      link.href = journal.pdf_url
+      link.download = `${journal.title}.pdf`
+      link.target = '_blank'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
   }
 
   if (loading) {
@@ -81,6 +94,57 @@ export default function JournalDetail({ params }) {
                 <span className="meta-item">
                   📅 <strong>Tanggal Publikasi:</strong> {formatDate(journal.publication_date)}
                 </span>
+              </div>
+            </div>
+
+            {journal.pdf_url && (
+              <div className="detail-pdf-section">
+                <div className="pdf-buttons">
+                  <a 
+                    href={journal.pdf_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="pdf-button pdf-view"
+                  >
+                    👁️ Lihat PDF
+                  </a>
+                  <button 
+                    onClick={handleDownloadPDF}
+                    className="pdf-button pdf-download"
+                  >
+                    📥 Download PDF
+                  </button>
+                </div>
+                <p className="pdf-info">
+                  💡 Lihat PDF di browser atau download untuk dibaca offline
+                </p>
+              </div>
+            )}
+
+            {/* Informasi Lengkap Jurnal */}
+            <div className="detail-section">
+              <h2 className="section-title">📋 Informasi Lengkap</h2>
+              <div className="info-grid">
+                <div className="info-item">
+                  <span className="info-label">📖 Judul Lengkap:</span>
+                  <span className="info-value">{journal.title}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">✍️ Penulis:</span>
+                  <span className="info-value">{journal.authors}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">📅 Tanggal Publikasi:</span>
+                  <span className="info-value">{formatDate(journal.publication_date)}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">🆔 ID Jurnal:</span>
+                  <span className="info-value">#{journal.id}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">🔄 Terakhir Diperbarui:</span>
+                  <span className="info-value">{formatDate(journal.updated_at)}</span>
+                </div>
               </div>
             </div>
 

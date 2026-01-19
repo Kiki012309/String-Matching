@@ -18,6 +18,7 @@ model Journal {
   publication_date  DateTime @db.Date
   abstract          String?  @db.Text
   keywords          String?  @db.VarChar(500)
+  pdf_url           String?  @db.VarChar(500)
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
 

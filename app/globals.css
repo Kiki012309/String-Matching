@@ -709,6 +709,128 @@ body::before {
   margin-bottom: 25px;
 }
 
+/* PDF Button Styles */
+.detail-pdf-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 25px 0;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.pdf-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pdf-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-view {
+  background: white;
+  color: #667eea;
+}
+
+.pdf-download {
+  background: #764ba2;
+  color: white;
+}
+
+.pdf-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pdf-download:hover {
+  background: #5e3a82;
+}
+
+.pdf-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-info {
+  color: white;
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Informasi Lengkap Section */
+.section-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #667eea;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  transition: all 0.2s ease;
+}
+
+.info-item:hover {
+  background: #e9ecef;
+  transform: translateX(4px);
+}
+
+.info-label {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-value {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .pdf-buttons {
+    flex-direction: column;
+  }
+  
+  .pdf-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Footer Styles */
 .footer {
   background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
