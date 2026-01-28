@@ -145,7 +145,7 @@ export default function Home() {
                 boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
               }}
             >
-              📊 Bandingkan Algoritma
+              Bandingkan Algoritma
             </a>
             <a 
               href="https://scholar.google.com" 
@@ -154,7 +154,7 @@ export default function Home() {
               className="header-badge"
               style={{ textDecoration: 'none', cursor: 'pointer' }}
             >
-              ✨ Cari di Google Scholar →
+              Cari di Google Scholar →
             </a>
           </div>
 
@@ -195,9 +195,9 @@ export default function Home() {
                   transition: 'all 0.3s ease'
                 }}
               >
-                <option value="naive">🔨 Naive (Brute Force)</option>
-                <option value="kmp">🎯 KMP</option>
-                <option value="boyerMoore">🚀 Boyer-Moore</option>
+                <option value="naive">Naive (Brute Force)</option>
+                <option value="kmp">KMP</option>
+                <option value="boyerMoore">Boyer-Moore</option>
               </select>
               
               <input
@@ -215,11 +215,11 @@ export default function Home() {
                 className="search-button"
                 disabled={loading || !searchQuery.trim()}
               >
-                <span>{loading ? '🔄 Mencari...' : '🔎 Cari Jurnal'}</span>
+                <span>{loading ? 'Mencari...' : 'Cari Jurnal'}</span>
               </button>
             </div>
             <p className="search-info" style={{ marginTop: '15px' }}>
-              💡 <strong>Tips:</strong> Pilih algoritma dan masukkan kata kunci seperti machine learning, BERT, transformer, atau nama penulis
+              <strong>Tips:</strong> Pilih algoritma dan masukkan kata kunci seperti machine learning, BERT, transformer, atau nama penulis
             </p>
           </form>
         </div>
@@ -243,7 +243,7 @@ export default function Home() {
             ) : (
               <>
                 <div className="results-header">
-                  <h2>📚 Hasil Pencarian</h2>
+                  <h2>Hasil Pencarian</h2>
                   <p className="results-count">
                     Ditemukan <strong>{totalResults}</strong> jurnal {searchQuery && `untuk "${searchQuery}"`}
                   </p>
@@ -256,16 +256,16 @@ export default function Home() {
                       color: 'white'
                     }}>
                       <p style={{ marginBottom: '8px' }}>
-                        <strong>⚡ Algoritma:</strong> {algorithmStats.algorithm}
+                        <strong>Algoritma:</strong> {algorithmStats.algorithm}
                       </p>
                       <p style={{ marginBottom: '8px' }}>
-                        <strong>⏱️ Waktu Eksekusi:</strong> {algorithmStats.executionTime} ms
+                        <strong>Waktu Eksekusi:</strong> {algorithmStats.executionTime} ms
                       </p>
                       <p style={{ marginBottom: '8px' }}>
-                        <strong>🔢 Perbandingan:</strong> {algorithmStats.comparisons?.toLocaleString() || 0}
+                        <strong>Perbandingan:</strong> {algorithmStats.comparisons?.toLocaleString() || 0}
                       </p>
                       <p>
-                        <strong>📊 Kompleksitas:</strong> {algorithmStats.timeComplexity}
+                        <strong>Kompleksitas:</strong> {algorithmStats.timeComplexity}
                       </p>
                     </div>
                   )}
@@ -273,7 +273,7 @@ export default function Home() {
 
                 {totalResults === 0 ? (
                   <div className="no-results">
-                    <p>🔍 Tidak ada jurnal yang ditemukan</p>
+                    <p>Tidak ada jurnal yang ditemukan</p>
                     <p>Coba gunakan kata kunci yang berbeda atau lebih spesifik</p>
                   </div>
                 ) : (
@@ -289,20 +289,20 @@ export default function Home() {
                             cursor: 'pointer'
                           }}
                         >
-                          <h3 className="journal-title">📄 {journal.title}</h3>
+                          <h3 className="journal-title">{journal.title}</h3>
                           <p className="journal-authors">
-                            👤 <strong>Penulis:</strong> {journal.authors}
+                            <strong>Penulis:</strong> {journal.authors}
                           </p>
                           <div className="journal-meta">
                             <span className="journal-date">
-                              📅 {formatDate(journal.publication_date)}
+                              {formatDate(journal.publication_date)}
                             </span>
                           </div>
                           {journal.keywords && (
                             <div className="journal-keywords">
                               {journal.keywords.split(',').map((keyword, idx) => (
                                 <span key={idx} className="keyword-tag">
-                                  🏷️ {keyword.trim()}
+                                  {keyword.trim()}
                                 </span>
                               ))}
                             </div>
@@ -353,7 +353,7 @@ export default function Home() {
         <footer className="footer">
           <div className="footer-content">
             <div className="footer-section">
-              <h3>📚 Tentang Sistem</h3>
+              <h3>Tentang Sistem</h3>
               <p>Website pencarian jurnal ilmiah dengan teknologi string matching untuk hasil pencarian yang akurat dan cepat.</p>
               <a 
                 href="https://scholar.google.com" 
@@ -365,18 +365,18 @@ export default function Home() {
               </a>
             </div>
             <div className="footer-section">
-              <h3>⚙️ Teknologi</h3>
+              <h3>Teknologi</h3>
               <ul>
                 <li>Next.js & React</li>
                 <li>MySQL Database</li>
                 <li>String Matching Algorithms:</li>
-                <li>• Naive (Brute Force)</li>
-                <li>• KMP (Knuth-Morris-Pratt)</li>
-                <li>• Boyer-Moore</li>
+                <li>Naive (Brute Force)</li>
+                <li>KMP (Knuth-Morris-Pratt)</li>
+                <li>Boyer-Moore</li>
               </ul>
             </div>
             <div className="footer-section">
-              <h3>🔗 Sumber Jurnal</h3>
+              <h3>Sumber Jurnal</h3>
               <ul>
                 <li>
                   <a 

@@ -89,10 +89,10 @@ export default function JournalDetail({ params }) {
               <h1>{journal.title}</h1>
               <div className="detail-meta">
                 <span className="meta-item">
-                  👤 <strong>Penulis:</strong> {journal.authors}
+                  <strong>Penulis:</strong> {journal.authors}
                 </span>
                 <span className="meta-item">
-                  📅 <strong>Tanggal Publikasi:</strong> {formatDate(journal.publication_date)}
+                  <strong>Tanggal Publikasi:</strong> {formatDate(journal.publication_date)}
                 </span>
               </div>
             </div>
@@ -106,43 +106,43 @@ export default function JournalDetail({ params }) {
                     rel="noopener noreferrer"
                     className="pdf-button pdf-view"
                   >
-                    👁️ Lihat PDF
+                    Lihat PDF
                   </a>
                   <button 
                     onClick={handleDownloadPDF}
                     className="pdf-button pdf-download"
                   >
-                    📥 Download PDF
+                    Download PDF
                   </button>
                 </div>
                 <p className="pdf-info">
-                  💡 Lihat PDF di browser atau download untuk dibaca offline
+                  Lihat PDF di browser atau download untuk dibaca offline
                 </p>
               </div>
             )}
 
             {/* Informasi Lengkap Jurnal */}
             <div className="detail-section">
-              <h2 className="section-title">📋 Informasi Lengkap</h2>
+              <h2 className="section-title">Informasi Lengkap</h2>
               <div className="info-grid">
                 <div className="info-item">
-                  <span className="info-label">📖 Judul Lengkap:</span>
+                  <span className="info-label">Judul Lengkap:</span>
                   <span className="info-value">{journal.title}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">✍️ Penulis:</span>
+                  <span className="info-label">Penulis:</span>
                   <span className="info-value">{journal.authors}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">📅 Tanggal Publikasi:</span>
+                  <span className="info-label">Tanggal Publikasi:</span>
                   <span className="info-value">{formatDate(journal.publication_date)}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">🆔 ID Jurnal:</span>
+                  <span className="info-label">ID Jurnal:</span>
                   <span className="info-value">#{journal.id}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">🔄 Terakhir Diperbarui:</span>
+                  <span className="info-label">Terakhir Diperbarui:</span>
                   <span className="info-value">{formatDate(journal.updated_at)}</span>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function JournalDetail({ params }) {
 
             {journal.keywords && (
               <div className="detail-keywords">
-                <strong>🏷️ Kata Kunci:</strong>
+                <strong>Kata Kunci:</strong>
                 <div className="keywords-list">
                   {journal.keywords.split(',').map((keyword, idx) => (
                     <span key={idx} className="keyword-tag">
@@ -163,7 +163,7 @@ export default function JournalDetail({ params }) {
 
             {journal.abstract && (
               <div className="detail-abstract">
-                <h2>📄 Abstrak</h2>
+                <h2>Abstrak</h2>
                 <p>{journal.abstract}</p>
               </div>
             )}
